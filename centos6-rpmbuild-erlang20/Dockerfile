@@ -1,6 +1,9 @@
 FROM centos:6
 LABEL maintainer "Julian Meier <julianmeier@mailtower.ch>"
 
+RUN groupadd -g 1000 jenkins \
+	&& useradd -d "/home/jenkins" -u 1000 -g 1000 -m -s /bin/bash jenkins
+
 RUN yum groupinstall -y "Development Tools" --exclude=git \
   && yum install -y \
     epel-release \
@@ -25,7 +28,7 @@ RUN yum groupinstall -y "Development Tools" --exclude=git \
     gettext-devel \
   && yum clean all
 
-RUN curl -sSL -o /tmp/git.tar.gz https://github.com/git/git/archive/v2.14.1.tar.gz \
+RUN curl -sSL -o /tmp/git.tar.gz https://github.com/git/git/archive/v2.15.1.tar.gz \
   && mkdir -p /usr/src/git \
   && tar -xzf /tmp/git.tar.gz -C /usr/src/git --strip-components 1 \
   && rm -f /tmp/git.tar.gz \
@@ -58,3 +61,5 @@ RUN curl -sSL -o /tmp/rebar3.tar.gz https://github.com/erlang/rebar3/archive/3.4
     && mv rebar3 /usr/local/bin \
   ) \
   && rm -rf /usr/src/rebar3
+
+USER jenkins
