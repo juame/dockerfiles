@@ -51,7 +51,7 @@ RUN wget https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
   && yum install -y esl-erlang-20.1-1 \
   && yum clean all
 
-RUN curl -sSL -o /tmp/rebar3.tar.gz https://github.com/erlang/rebar3/archive/3.4.7.tar.gz \
+RUN curl -sSL -o /tmp/rebar3.tar.gz https://github.com/erlang/rebar3/archive/3.4.2.tar.gz \
   && mkdir -p /usr/src/rebar3 \
   && tar -xzf /tmp/rebar3.tar.gz -C /usr/src/rebar3 --strip-components 1 \
   && rm -f /tmp/rebar3.tar.gz \
